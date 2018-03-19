@@ -8,11 +8,10 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class Java2DArenaDrawer  {
+public class Java2DArenaDrawer extends JPanel {
 
     public static final BufferedImage ROBOT_IMG = loadImage("tank.png");
-    private final JPanel arenaPanel;
-    private final JFrame f;
+    private final JFrame frame;
 
     AffineTransform identity = new AffineTransform();
 
@@ -21,23 +20,21 @@ public class Java2DArenaDrawer  {
     public Java2DArenaDrawer(Arena arena) {
         this.arena = arena;
 
-        f = new JFrame("Robo Wars");
-        f.setSize(arena.width, arena.height);
+        frame = new JFrame("Robo Wars");
+        frame.setSize(arena.width, arena.height);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        arenaPanel = new JPanel(true) {
-            @Override
-            protected void paintComponent(Graphics g) {
-                g.clearRect(0, 0, arena.width, arena.height);
-                for (Robot robot : arena.robots) {
-                    drawRobot(g, robot);
-                }
-                repaint();
-            }
-        };
+        frame.add(this);
+        frame.setVisible(true);
+    }
 
-        f.add(arenaPanel);
-        f.setVisible(true);
+    @Override
+    public void paint(Graphics g) {
+        g.clearRect(0, 0, arena.width, arena.height);
+        for (Robot robot : arena.robots) {
+            drawRobot(g, robot);
+        }
+        repaint();
     }
 
     private void drawRobot(Graphics g, Robot robot) {

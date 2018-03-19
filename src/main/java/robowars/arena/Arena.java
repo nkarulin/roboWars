@@ -53,7 +53,7 @@ public class Arena {
         Robot robot2 = new MyRobot("Dmitry", RobotColor.GREE);
         MyRobot robot3 = new MyRobot("Ignat", RobotColor.CYAN);
 
-        Arena arena = new Arena(400, 400, 50);
+        Arena arena = new Arena(800, 600, 50);
 
         arena.addRobot(robot1, 1, 2);
         arena.addRobot(robot2, 100, 2);
